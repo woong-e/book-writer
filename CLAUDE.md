@@ -22,7 +22,7 @@ python scripts/verify.py          # 원고 규약·사실(denylist)·분량(2,50
 | 8원칙 정의·출처·명칭·금지 표현(denylist) | [`docs/verified-facts.md`](docs/verified-facts.md) (사실 SoT) |
 | 톤·용어·장 템플릿·front-matter·메타데이터 규격 | [`docs/conventions.md`](docs/conventions.md) |
 | 7인 에이전트 역할·모델 라우팅·최소 권한 정의 | [`.claude/agents/`](.claude/agents/) (`researcher`, `chapter-writer`, `fact-checker`, `tech-reviewer`, `structure-reviewer`, `proofreader`, `chapter-reviewer`) |
-| 오케스트레이터 메타스킬 (7종 작업 모드 라우팅) | [`.claude/skills/book-writer/SKILL.md`](.claude/skills/book-writer/SKILL.md) (미러: [`book-writer/SKILL.md`](book-writer/SKILL.md)) |
+| 오케스트레이터 메타스킬 (7종 작업 모드 라우팅) | [`.claude/skills/book-writer/SKILL.md`](.claude/skills/book-writer/SKILL.md) |
 | 모드별 지연 로딩(Lazy Loading) 워크플로 7종 | [`.claude/skills/book-writer/workflows/`](.claude/skills/book-writer/workflows/) (`01-writing.md` ~ `07-paragraph-walkthrough.md`) |
 | Why-First 지시서·품질 체크리스트·한국어 AI 티 제거 | [`.claude/skills/book-writer/references/`](.claude/skills/book-writer/references/) (`style-guide.md`, `quality-checklist.md`, `glossary.md`, `ai-tell-taxonomy.md`) |
 | 리서치 노트 및 실제 원고 | [`research/`](research/), [`manuscripts/`](manuscripts/) |
