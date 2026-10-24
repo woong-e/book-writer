@@ -1,4 +1,23 @@
-<!-- chapter: 01, title: "다중 에이전트 오케스트레이션 하네스와 최소 권한 설계", word_count: 3445, status: approved, author: chapter-writer -->
+<!-- chapter: 01, title: "다중 에이전트 오케스트레이션 하네스와 최소 권한 설계", word_count: 3668, status: approved, author: chapter-writer, reviewers: [fact-checker, tech-reviewer, structure-reviewer, proofreader, chapter-reviewer] -->
+---
+part: 1
+chapter: 1
+slug: chapter-01
+title: "다중 에이전트 오케스트레이션 하네스와 최소 권한 설계"
+status: "approved"
+word_count: 3668
+wikidocs_page_id: 363235
+parent_page_id: 363213
+official_links:
+  - https://openai.com/index/harness-engineering/
+  - https://code.claude.com/docs/en/sub-agents
+  - https://modelcontextprotocol.io
+last_verified: "2026-10-24"
+crosscheck: "pass"
+crosscheck_date: "2026-10-24"
+humanized: "pass"
+humanized_date: "2026-10-24"
+---
 
 # 1장. 다중 에이전트 오케스트레이션 하네스와 최소 권한 설계
 

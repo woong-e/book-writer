@@ -72,7 +72,11 @@ flowchart LR
     CR -->|APPROVED| DONE(["최종 완료 및 팀 해체"])
 ```
 
-### 오케스트레이터 실행 절차 (3-Step Lifecycle)
-1. **Mode Identification & Lazy Load**: 사용자 입력에서 모드를 식별하고 해당 `workflows/0X-*.md` 파일과 필요한 `references/` 문서만 로드합니다.
-2. **Team Spawn & Task Delegation**: 해당 모드에 필요한 에이전트들만 선택적으로 구성하고, 입출력 파일 경로와 `SendMessage` 소통 규약을 부여합니다.
-3. **Quality Gate & Teardown**: 최종 단계 에이전트(`chapter-reviewer` 등)로부터 완료 신호와 품질 체크리스트 통과(`메타데이터 주석`, `2,500~4,000 단어`, `코드 블록 실행 가능`)를 확인한 후 팀을 해체하고 사용자에게 결과를 보고합니다.
+### 오케스트레이터 실행 절차 (3-Step Lifecycle & Mechanical Gates)
+1. **Mode Identification & Lazy Load**: 사용자 입력에서 모드를 식별하고 해당 `workflows/0X-*.md` 파일과 필요한 `references/` 및 `docs/`(진실의 원천: `docs/toc.json`, `docs/verified-facts.md`, `docs/conventions.md`) 문서만 로드합니다.
+2. **Team Spawn & Task Delegation**: 해당 모드에 필요한 에이전트들만 선택적으로 구성하고, 입출력 파일 경로와 `SendMessage` 직접 소통 규약을 부여합니다.
+3. **4-Layer Quality Gate & Teardown**:
+   - ① `fact-checker` + `scripts/crosscheck.py` 사실 검증 (`crosscheck: "pass"`)
+   - ② `tech-reviewer` 코드 실행 가능성 및 Why-First 아키텍처 검증
+   - ③ `structure-reviewer` 분량(`2,500~4,000 단어`) 및 섹션 구조 검증 + `proofreader` 한국어 AI 티 제거 윤문(`references/ai-tell-taxonomy.md` → `humanized: "pass"`)
+   - ④ `chapter-reviewer` 총괄 비평(`APPROVED`) 및 `python scripts/verify.py` 기계적 불변식 통과 확인 후 팀을 해체하고 사용자에게 결과를 보고합니다.

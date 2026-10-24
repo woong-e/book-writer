@@ -1,0 +1,45 @@
+{
+  "book": {
+    "subject": "8원칙으로 살펴보는 하네스 엔지니어링과 7인 다중 에이전트 집필 시스템",
+    "summary": "OpenAI의 Harness Engineering(Ryan Lopopolo, 2026) 원문에서 도출한 8원칙과 7인 다중 에이전트 오케스트레이션 하네스(book-writer)를 결합하여, 에이전트가 안정적으로 일하는 환경과 실제 집필 파이프라인을 구축하는 실전 기술서.",
+    "open_yn": "Y",
+    "wikidocs_book_id": 20064
+  },
+  "parts": [
+    {
+      "part": 1,
+      "title": "하네스 엔지니어링과 다중 에이전트 오케스트레이션",
+      "wikidocs_page_id": 363213,
+      "chapters": [
+        {
+          "chapter": 1,
+          "slug": "chapter-01",
+          "title": "다중 에이전트 오케스트레이션 하네스와 최소 권한 설계",
+          "official_links": [
+            "https://openai.com/index/harness-engineering/",
+            "https://code.claude.com/docs/en/sub-agents",
+            "https://modelcontextprotocol.io"
+          ]
+        },
+        {
+          "chapter": 2,
+          "slug": "chapter-02",
+          "title": "원문에서 도출한 하네스 엔지니어링 8원칙과 기계적 강제",
+          "official_links": [
+            "https://openai.com/index/harness-engineering/",
+            "https://code.claude.com/docs"
+          ]
+        },
+        {
+          "chapter": 3,
+          "slug": "chapter-03",
+          "title": "책 집필 하네스 케이스 스터디와 L1~L5 스코어카드 평가",
+          "official_links": [
+            "https://openai.com/index/harness-engineering/",
+            "https://github.com/aiiiiiiiden/harness_engineering_8_priciples"
+          ]
+        }
+      ]
+    }
+  ]
+}
