@@ -1,42 +1,42 @@
 {
   "book": {
-    "subject": "8원칙으로 살펴보는 하네스 엔지니어링과 7인 다중 에이전트 집필 시스템",
-    "summary": "OpenAI의 Harness Engineering(Ryan Lopopolo, 2026) 원문에서 도출한 8원칙과 7인 다중 에이전트 오케스트레이션 하네스(book-writer)를 결합하여, 에이전트가 안정적으로 일하는 환경과 실제 집필 파이프라인을 구축하는 실전 기술서.",
+    "subject": "데이터와 AI로 구축하는 스마트 산업안전 엔지니어링 — 위험성평가부터 중대재해 예방 자동화까지",
+    "summary": "산업안전보건법과 중대재해처벌법 시대에 형식적인 서류 중심 안전관리를 넘어, 작업환경측정·위험성평가 데이터 파이프라인과 AI 안전 에이전트 하네스를 구축하여 현장의 재해를 실질적으로 예방하는 실전 산업안전 기술서.",
     "open_yn": "Y",
-    "wikidocs_book_id": 20064
+    "wikidocs_book_id": 20065
   },
   "parts": [
     {
       "part": 1,
-      "title": "하네스 엔지니어링과 다중 에이전트 오케스트레이션",
-      "wikidocs_page_id": 363213,
+      "title": "스마트 산업안전보건과 위험성평가 엔지니어링",
+      "wikidocs_page_id": 363300,
       "chapters": [
         {
           "chapter": 1,
           "slug": "chapter-01",
-          "title": "다중 에이전트 오케스트레이션 하네스와 최소 권한 설계",
+          "title": "스마트 산업안전보건과 데이터 기반 위험성평가 파이프라인 설계",
           "official_links": [
-            "https://openai.com/index/harness-engineering/",
-            "https://code.claude.com/docs/en/sub-agents",
-            "https://modelcontextprotocol.io"
+            "https://www.law.go.kr/",
+            "https://www.kosha.or.kr/",
+            "https://www.moel.go.kr/"
           ]
         },
         {
           "chapter": 2,
           "slug": "chapter-02",
-          "title": "원문에서 도출한 하네스 엔지니어링 8원칙과 기계적 강제",
+          "title": "화학물질 안전관리(MSDS)와 작업환경측정 데이터 자동 파싱",
           "official_links": [
-            "https://openai.com/index/harness-engineering/",
-            "https://code.claude.com/docs"
+            "https://www.kosha.or.kr/",
+            "https://www.moel.go.kr/"
           ]
         },
         {
           "chapter": 3,
           "slug": "chapter-03",
-          "title": "책 집필 하네스 케이스 스터디와 L1~L5 스코어카드 평가",
+          "title": "중대재해처벌법 안전보건관리체계와 아차사고(Near-Miss) 피드백 루프",
           "official_links": [
-            "https://openai.com/index/harness-engineering/",
-            "https://github.com/aiiiiiiiden/harness_engineering_8_priciples"
+            "https://www.law.go.kr/",
+            "https://www.moel.go.kr/"
           ]
         }
       ]

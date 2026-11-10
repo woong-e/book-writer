@@ -36,9 +36,9 @@ def check_facts_registry() -> int:
     with open(FACTS_PATH, encoding="utf-8") as f:
         text = f.read()
     required_anchors = [
-        "Humans steer, agents execute",
-        "사람이 조종하고, 에이전트가 실행한다",
-        "원문에서 도출한 8원칙",
+        "산업안전보건법 제36조",
+        "중대재해처벌법",
+        "1:29:300",
         "pdfplumber",
         "researcher",
         "chapter-writer",
@@ -102,14 +102,24 @@ def audit_manuscript(slug: str) -> dict:
             "fix": "테이블 추출 시 pdfplumber를 선택하는 이유 추가 권장",
         })
 
-    # 3. 금지 표현(denylist) 교차 확인
-    if re.search(r"OpenAI(이|가)?\s*(만든|발표한|정의한|공식)?\s*8\s*원칙", body):
+    # 3. 산업안전 법령·이론 핵심 사실 대조 (산안법 제36조, 하인리히 1:29:300, 스위스 치즈 모델)
+    if "제36조" in body and "1:29:300" in body:
         findings.append({
-            "claim": "OpenAI 원문이 8원칙을 직접 번호로 정의했다는 단정 표현",
+            "claim": "산업안전보건법 제36조(위험성평가) 및 하인리히 1:29:300 법칙 정확성",
+            "verdict": "correct",
+            "severity": "low",
+            "evidence": "docs/verified-facts.md §1 산업안전 핵심 법령·이론 표 일치",
+            "fix": "",
+        })
+
+    # 4. 금지 표현(denylist) 교차 확인
+    if re.search(r"1\s*:\s*(10|20|30)\s*:\s*300", body):
+        findings.append({
+            "claim": "하인리히 법칙 비율 표기 오류",
             "verdict": "incorrect",
             "severity": "high",
-            "evidence": "OpenAI 원문(Ryan Lopopolo, 2026-02-11)은 번호를 매기지 않음",
-            "fix": "'원문에서 도출한 8원칙'으로 수정",
+            "evidence": "하인리히(1931) 원문의 비율은 1:29:300임",
+            "fix": "'1:29:300'으로 수정",
         })
 
     blockers = sum(

@@ -118,11 +118,12 @@ def set_front_matter_key(text: str, key: str, value) -> str:
 
 
 def count_words(body: str) -> int:
-    """코드 블록(```...```)과 마크다운 표 구분선(| :--- |)을 제외한 순수 본문 산문의 단어(어절) 수를 계산한다."""
+    """코드 블록(```...```), 마크다운 표 행(| ... |), URL 링크를 제외한 순수 한국어/영문 산문 단어(어절) 수를 계산한다."""
     no_code = re.sub(r"```.*?```", "", body, flags=re.DOTALL)
-    # 마크다운 표 기호(|) 및 구분선(---) 토큰 제외
-    no_table_pipes = re.sub(r"[|:-\u2500-\u257f]{2,}", " ", no_code)
-    return len(re.findall(r"[가-힣A-Za-z0-9_]+[^\s|]*", no_table_pipes))
+    no_tables = re.sub(r"(?m)^\s*\|.*\|\s*$", "", no_code)
+    no_urls = re.sub(r"https?://[^\s)]+", "", no_tables)
+    no_headings = re.sub(r"(?m)^\s*#+\s+.*$", "", no_urls)
+    return len(re.findall(r"[가-힣A-Za-z]{2,}[^\s|]*", no_headings))
 
 
 def chapter_path(slug: str) -> str:
