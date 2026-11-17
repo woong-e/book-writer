@@ -67,12 +67,72 @@ def verify_python_blocks(rel_path: str, body: str) -> list[str]:
     return errs
 
 
+def verify_skill_antipatterns() -> tuple[list[str], list[str]]:
+    """ex-05-12-antipatterns의 3대 스킬 안티패턴(거대 본문 / references 부재 / 이유 없는 규칙)을 기계적으로 감사."""
+    errs, warns = [], []
+    skill_dir = os.path.join(".claude", "skills", "book-writer")
+    skill_md = os.path.join(skill_dir, "SKILL.md")
+    refs_dir = os.path.join(skill_dir, "references")
+    workflows_dir = os.path.join(skill_dir, "workflows")
+
+    if not os.path.isfile(skill_md):
+        errs.append(f"{skill_md}: 스킬 정의 파일이 존재하지 않음")
+        return errs, warns
+
+    with open(skill_md, encoding="utf-8") as f:
+        content = f.read()
+    lines = content.splitlines()
+    line_count = len(lines)
+
+    # 1. 안티패턴 1 (거대 본문): wc -l >= 500 발현 차단 (권고 상한 150행 모니터링)
+    if line_count >= 500:
+        errs.append(
+            f"{skill_md}: 안티패턴 1(거대 본문) 발현 — 현재 {line_count}행 (임계치 500행 이상). "
+            f"Progressive Disclosure 원칙에 따라 세부 절차를 workflows/로 분리 필요"
+        )
+    elif line_count > 150:
+        warns.append(
+            f"{skill_md}: 본문 라인 수({line_count}행)가 권고 기준(150행)을 초과함 — workflows/ 외부화 권장"
+        )
+
+    # 2. 안티패턴 2 (references 부재): references/ 디렉토리 및 Layer 3 프리셋 존재 확인
+    if not os.path.isdir(refs_dir) or not os.listdir(refs_dir):
+        errs.append(
+            f"{skill_md}: 안티패턴 2(references 부재) 발현 — {refs_dir} 디렉토리가 없거나 비어 있음 (Layer 3 분리 위반)"
+        )
+
+    # 3. 안티패턴 3 (이유 없는 규칙): 강제 키워드 >= 5 AND 인과 키워드 == 0 차단
+    coercive_cnt = len(re.findall(r"ALWAYS|NEVER|반드시|절대", content))
+    causal_cnt = len(re.findall(r"왜냐하면|때문에", content))
+    if coercive_cnt >= 5 and causal_cnt == 0:
+        errs.append(
+            f"{skill_md}: 안티패턴 3(이유 없는 규칙 / Why-First 위반) 발현 — "
+            f"강제 키워드 {coercive_cnt}건 대비 인과 근거('왜냐하면|때문에') 0건"
+        )
+
+    # 워크플로 파일들의 Why-First 인과 근거(왜냐하면|때문에) 유무 점검
+    if os.path.isdir(workflows_dir):
+        for wf_name in sorted(os.listdir(workflows_dir)):
+            if not wf_name.endswith(".md"):
+                continue
+            wf_path = os.path.join(workflows_dir, wf_name)
+            with open(wf_path, encoding="utf-8") as wf:
+                wf_text = wf.read()
+            if not re.search(r"왜냐하면|때문에|Why-First", wf_text):
+                warns.append(f"{wf_path}: Why-First 인과 해설('왜냐하면|때문에') 보강 권장")
+
+    return errs, warns
+
+
 def main():
     strict = "--strict" in sys.argv
     toc = load_toc()
     by_slug = {ch["slug"]: (part, ch) for part, ch in iter_toc_chapters(toc)}
 
     errors, warnings = [], []
+    ap_errs, ap_warns = verify_skill_antipatterns()
+    errors.extend(ap_errs)
+    warnings.extend(ap_warns)
 
     for slug, (_, ch) in by_slug.items():
         if not os.path.exists(chapter_path(slug)):

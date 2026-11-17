@@ -80,3 +80,13 @@ flowchart LR
    - ② `tech-reviewer` 코드 실행 가능성 및 Why-First 아키텍처 검증
    - ③ `structure-reviewer` 분량(`2,500~4,000 단어`) 및 섹션 구조 검증 + `proofreader` 한국어 AI 티 제거 윤문(`references/ai-tell-taxonomy.md` → `humanized: "pass"`)
    - ④ `chapter-reviewer` 총괄 비평(`APPROVED`) 및 `python scripts/verify.py` 기계적 불변식 통과 확인 후 팀을 해체하고 사용자에게 결과를 보고합니다.
+
+---
+
+## 5. 스킬 3대 안티패턴 방어 및 아키텍처 매핑 (`cross-ref`)
+
+| 안티패턴 (`ex-05-12`) | 진단 룰 및 임계치 | 매핑 아키텍처 (`cross-ref`) | 해결 권고 및 기계적 가드레일 (`scripts/verify.py`) |
+| :--- | :--- | :--- | :--- |
+| **안티패턴 1: 거대 본문** | `wc -l >= 500` | **Progressive Disclosure**<br/>(`SKILL.md` ➔ `workflows/01~07-*.md`) | 메인 `SKILL.md`는 라우팅 허브(150행 미만 권장, 500행 상한)로 유지하고 신규 모드는 `workflows/08-*.md`로 외부화함 |
+| **안티패턴 2: `references` 부재** | `references/` 없음<br/>`+` 도메인 분기 `>= 4` | **Layer 3 References 격리**<br/>(`references/*.md`, `style-guide/presets/`) | 도메인 분기(7개 모드) 공통 규칙은 `references/` 4대 기준서 및 장르별 프리셋(`references/style-guide/presets/`)으로 분리함 |
+| **안티패턴 3: 이유 없는 규칙** | 강제어 `>= 5` `AND`<br/>인과어(`왜냐하면\|때문에`) `== 0` | **Why-First 원칙**<br/>(`설계 이유 (Why)` 전용 칼럼 + 인과 명시) | 단정적 금지어(`ALWAYS/NEVER/반드시/절대`) 나열을 지양하고 실패 모드와 기술적 이유(`때문에`/`왜냐하면`)를 함께 서술함 |

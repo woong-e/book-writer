@@ -2,9 +2,11 @@
 
 > **Lazy Load Notice**: 이 문서는 사용자가 **신규 챕터 집필(`writing`)**을 요청했을 때만 로드됩니다.
 
-## 1. 파이프라인 아키텍처 (Execution Flow)
+## 1. 파이프라인 아키텍처 및 순서 설계 이유 (Why-First)
 
 `자료 조사(researcher)` ➔ `초고 작성(chapter-writer)` ➔ `[사실 확인(fact-checker) | 기술 검토(tech-reviewer) | 구조 검토(structure-reviewer)]` ➔ `교정(proofreader)` ➔ `비평(chapter-reviewer)`
+
+> **Why-First 파이프라인 순서 근거**: 1차 사실·코드·구조 검증(Step 3)이 끝나기 전에 문장 교정(`proofreader`, Step 4)을 먼저 수행하면, 이후 기술·팩트 수정 과정에서 교정된 문장이 다시 덮어써져 토큰과 작업이 중복 소모되기 **때문에** 반드시 3인 병렬 검증 반영 후에 윤문(`proofreader`)과 총괄 비평(`chapter-reviewer`, Step 5)을 배치합니다.
 
 ---
 
